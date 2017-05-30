@@ -48,7 +48,7 @@
                                         <rect key="frame" x="0.0" y="92" width="298" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="TYa-Mt-Uj1" id="87G-6j-KWN">
-                                            <frame key="frameInset" width="298" height="43"/>
+                                            <frame key="frameInset" width="298" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sBn-c3-MfS">
@@ -101,13 +101,79 @@
                     <view key="view" contentMode="scaleToFill" id="QGo-Mj-p9j">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="new-york-skyline-fhd-mobile-1080x1920" translatesAutoresizingMaskIntoConstraints="NO" id="QPO-rx-tPp"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zsk-1J-0dO">
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WxA-no-MqQ">
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Clear" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="53n-oc-wN7">
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0˚" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="seL-76-5if">
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="76" id="dmC-yc-84M"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="75"/>
+                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0˚ / 0˚ " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x90-4M-DNd">
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="23"/>
+                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hourly Weather" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fRN-B8-TIX">
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
+                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstItem="fRN-B8-TIX" firstAttribute="top" secondItem="x90-4M-DNd" secondAttribute="bottom" constant="15" id="Cy9-1S-R88"/>
+                                            <constraint firstItem="53n-oc-wN7" firstAttribute="leading" secondItem="WxA-no-MqQ" secondAttribute="leading" constant="45" id="LH2-C9-mYU"/>
+                                            <constraint firstItem="53n-oc-wN7" firstAttribute="top" secondItem="WxA-no-MqQ" secondAttribute="top" constant="350" id="NGz-HP-jgC"/>
+                                            <constraint firstItem="x90-4M-DNd" firstAttribute="top" secondItem="seL-76-5if" secondAttribute="bottom" id="QTh-Ef-jN2"/>
+                                            <constraint firstItem="fRN-B8-TIX" firstAttribute="leading" secondItem="x90-4M-DNd" secondAttribute="leading" id="T9a-Dj-9F7"/>
+                                            <constraint firstItem="seL-76-5if" firstAttribute="leading" secondItem="53n-oc-wN7" secondAttribute="leading" id="ZmI-Zk-e7a"/>
+                                            <constraint firstAttribute="height" constant="1000" id="cOV-m7-inY"/>
+                                            <constraint firstItem="seL-76-5if" firstAttribute="top" secondItem="53n-oc-wN7" secondAttribute="bottom" constant="25" id="cm6-wI-gnA"/>
+                                            <constraint firstItem="x90-4M-DNd" firstAttribute="leading" secondItem="seL-76-5if" secondAttribute="leading" id="sEw-MZ-K2M"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="WxA-no-MqQ" firstAttribute="top" secondItem="zsk-1J-0dO" secondAttribute="top" id="6oS-Lt-ccm"/>
+                                    <constraint firstItem="WxA-no-MqQ" firstAttribute="leading" secondItem="zsk-1J-0dO" secondAttribute="leading" id="Spj-wr-wON"/>
+                                    <constraint firstAttribute="bottom" secondItem="WxA-no-MqQ" secondAttribute="bottom" id="VqZ-QZ-lxY"/>
+                                    <constraint firstAttribute="trailing" secondItem="WxA-no-MqQ" secondAttribute="trailing" id="XfH-DK-TnP"/>
+                                    <constraint firstItem="WxA-no-MqQ" firstAttribute="width" secondItem="zsk-1J-0dO" secondAttribute="width" id="k78-1f-dN9"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="QPO-rx-tPp" firstAttribute="leading" secondItem="QGo-Mj-p9j" secondAttribute="leadingMargin" constant="-20" id="H1t-Ss-OUt"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="zsk-1J-0dO" secondAttribute="trailing" constant="-20" id="Rmm-U4-xjo"/>
+                            <constraint firstItem="zsk-1J-0dO" firstAttribute="top" secondItem="qn3-uC-fOF" secondAttribute="bottom" id="SF4-Bw-7aQ"/>
+                            <constraint firstItem="zsk-1J-0dO" firstAttribute="leading" secondItem="QGo-Mj-p9j" secondAttribute="leadingMargin" constant="-20" id="Yym-mS-Saw"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="QPO-rx-tPp" secondAttribute="trailing" constant="-20" id="d01-AD-SNc"/>
+                            <constraint firstItem="QPO-rx-tPp" firstAttribute="top" secondItem="qn3-uC-fOF" secondAttribute="bottom" id="fNz-40-lt0"/>
+                            <constraint firstItem="oMT-Fo-uM8" firstAttribute="top" secondItem="zsk-1J-0dO" secondAttribute="bottom" id="qBU-Fy-D4Y"/>
+                            <constraint firstItem="oMT-Fo-uM8" firstAttribute="top" secondItem="QPO-rx-tPp" secondAttribute="bottom" id="uow-rK-Vp1"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Aen-iz-1EZ">
-                        <barButtonItem key="leftBarButtonItem" title="men u" id="64X-8z-hhW"/>
+                        <barButtonItem key="leftBarButtonItem" title="menu" id="64X-8z-hhW"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="currentTempLabel" destination="seL-76-5if" id="xmN-kO-hje"/>
                         <outlet property="menuButton" destination="64X-8z-hhW" id="TeZ-ZX-tLw"/>
+                        <outlet property="minMaxTempLabel" destination="x90-4M-DNd" id="nif-8n-3uB"/>
+                        <outlet property="weatherConditionLabel" destination="53n-oc-wN7" id="30n-gN-JTC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DBx-0s-hSk" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -151,4 +217,7 @@
             <point key="canvasLocation" x="2000.8" y="-221.73913043478262"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="new-york-skyline-fhd-mobile-1080x1920" width="1080" height="1920"/>
+    </resources>
 </document>
