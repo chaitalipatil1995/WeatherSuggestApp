@@ -10,7 +10,7 @@
 import UIKit
 import CoreLocation
 import MBProgressHUD
-
+import Foundation
 
 class HomeViewController: UIViewController, CLLocationManagerDelegate, UITableViewDelegate, UITableViewDataSource {
 
@@ -37,7 +37,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UITableVi
     
     var hourCountString : String = ""
 
-    //var hourCountArray : NSArray = []
+    var listDictionary : NSArray = []
     
     
     
@@ -51,7 +51,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UITableVi
         
         revealViewController().rightViewRevealWidth = 150
 
-        
+        navigationController?.automaticallyAdjustsScrollViewInsets = false
         self.updateLocation()
 
         spinnerActivity = MBProgressHUD.showAdded(to: self.view, animated: true);
@@ -59,6 +59,8 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UITableVi
         spinnerActivity.detailsLabel.text = "Please Wait!!";
         
         hourlyWeatherTableView.backgroundColor = UIColor.clear
+        //hourlyWeatherTableView.alpha = 0.5
+        
         
     }
 
@@ -121,7 +123,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UITableVi
                        // let json = try JSONSerialization.jsonObject(with: data!, options:.allowFragments)
                         let jsonDictionary = try JSONSerialization.jsonObject(with: data!, options: [])
                         
-                      print(jsonDictionary)
+                        print(jsonDictionary)
                         
                         self.temperature = "\((jsonDictionary as AnyObject).value(forKeyPath: "main.temp")!)"
                         print(self.temperature)
@@ -133,19 +135,16 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UITableVi
 
                         print(self.weatherCondition)
                         
-                        
                         self.minTemp = "\((jsonDictionary as AnyObject).value(forKeyPath: "main.temp_min")!)"
                         print(self.minTemp)
                         self.maxTemp = "\((jsonDictionary as AnyObject).value(forKeyPath: "main.temp_max")!)"
                         print(self.maxTemp)
-                        
                         
                     }catch {
                         print("Error with Json: \(error)")
                     }
                 }
             
-
                 self.updateUI()
             
             }
@@ -169,7 +168,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UITableVi
     
     func getHourWeatherData(withLatitude latitude: String, longitude: String, apiKey key: String) {
         
-        let requestURL: NSURL = NSURL(string: "http://api.openweathermap.org/data/2.5/forecast?lat=\(latitude)&lon=\(longitude)&APPID=\(key)&units=metric&cnt=12")!
+        let requestURL: NSURL = NSURL(string: "http://api.openweathermap.org/data/2.5/forecast?lat=\(latitude)&lon=\(longitude)&APPID=\(key)&units=metric&cnt=7")!
         // print(requestURL)
         
         let urlRequest: NSMutableURLRequest = NSMutableURLRequest(url: requestURL as URL)
@@ -196,42 +195,21 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UITableVi
                     
                     print(self.hourCountString)
 
-                    let myInt = (self.hourCountString as NSString).integerValue
+                   // let myInt = (self.hourCountString as NSString).integerValue
 
-                    for i in 0 ..< myInt {
-                        
-                        
-                        self.temperature = "\((jsonDictionary as AnyObject).value(forKeyPath: "main.temp")!)"
-                        print(self.temperature)
-                        
-                    }
+                   
+                    self.listDictionary = ((jsonDictionary as AnyObject).value(forKey: "list") as? NSArray)!
+
                     
-                    self.temperature = "\((jsonDictionary as AnyObject).value(forKeyPath: "main.temp")!)"
-                    print(self.temperature)
-                  
-                    /*
-                    let weather: [Any]? = ((jsonDictionary as AnyObject).value(forKey: "weather") as? [Any])
-                    
-                    print(weather![0])
-                    
-                    self.weatherCondition = "\((weather![0] as AnyObject) .value(forKey: "description")!)"
-                    
-                    print(self.weatherCondition)
-                    
-                    
-                    self.minTemp = "\((jsonDictionary as AnyObject).value(forKeyPath: "main.temp_min")!)"
-                    print(self.minTemp)
-                    self.maxTemp = "\((jsonDictionary as AnyObject).value(forKeyPath: "main.temp_max")!)"
-                    print(self.maxTemp)
-                    */
-                    
+                    print(self.listDictionary.count)
+              
                 }catch {
                     print("Error with Json: \(error)")
                 }
+                self.hourlyWeatherTableView.reloadData()
+
             }
-            
-            
-            self.updateUI()
+
             
         }
         
@@ -246,7 +224,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UITableVi
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return listDictionary.count
         
     }
     
@@ -259,21 +237,43 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UITableVi
         cell.timeLabel.font = UIFont.boldSystemFont(ofSize: 22)
 
         cell.backgroundColor = UIColor.clear
+   
+        let hrDic : NSArray! = listDictionary.value(forKey: "main") as! NSArray
         
-        /*
-        if  alarms.count > 0  {
-            let alarmSTring = alarms[indexPath.row]
-            
-            //cell.taskLabel.text = taskSTring.value(forKey: "task") as? String
-            cell.timeLabel.text = alarmSTring.value(forKey: "time") as? String
-            cell.daysLabel.text = alarmSTring.value(forKey: "repeat") as? String
-            
-        } else {
-            cell.hrTempLabel.text = ""
-            cell.timeLabel.text = ""
-            //cell.editButton.isUserInteractionEnabled = false
-        }
-        */
+        let tempString : NSArray = hrDic.value(forKey: "temp") as! NSArray
+        
+        let tempStr : AnyObject = tempString[indexPath.row] as AnyObject
+        print(tempStr)
+
+        let s :String! = String(describing: tempStr)
+
+        cell.hrTempLabel.text = s + "˚"
+        print(cell.hrTempLabel.text)
+        
+        let dtDic : NSArray! = listDictionary.value(forKey: "dt_txt") as! NSArray
+
+        let dtStr : AnyObject = dtDic[indexPath.row] as AnyObject
+
+        
+        let fullDate    = dtStr
+        let fullDateArray = fullDate.components(separatedBy: " ")
+        
+        let date    = fullDateArray[0]
+        let time = fullDateArray[1]
+        
+        print(date)
+        print(time)
+        
+        let hrTimeArray = time.components(separatedBy: ":")
+        
+        let hr = hrTimeArray[0]
+        let min = hrTimeArray[1]
+        
+        print(hr)
+        
+        cell.timeLabel.text = hr + ":" + min
+        
+        
         return cell
     }
     
